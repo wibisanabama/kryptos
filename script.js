@@ -288,6 +288,29 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+function showModalSkeleton() {
+  $("modal-content").innerHTML = `
+    <div class="modal-skeleton-header">
+      <div class="skeleton modal-skeleton-icon"></div>
+      <div class="modal-skeleton-identity">
+        <div class="skeleton modal-skeleton-name"></div>
+        <div class="skeleton modal-skeleton-symbol"></div>
+      </div>
+    </div>
+    <div class="skeleton modal-skeleton-price"></div>
+    <div class="skeleton modal-skeleton-change"></div>
+    <div class="skeleton modal-skeleton-chart"></div>
+    <div class="modal-skeleton-stats">
+      ${Array.from({ length: 8 }, () => `
+        <div class="modal-skeleton-stat">
+          <div class="skeleton modal-skeleton-stat-label"></div>
+          <div class="skeleton modal-skeleton-stat-value"></div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
 async function openModal(coinId) {
   state.modalCoinId = coinId;
   state.chartDays = 7;
@@ -295,7 +318,7 @@ async function openModal(coinId) {
   const content = $("modal-content");
   overlay.classList.add("active");
   document.body.style.overflow = "hidden";
-  content.innerHTML = '<div class="modal-loading"><div class="spinner"></div><p>Loading data...</p></div>';
+  showModalSkeleton();
 
   try {
     const [coin, chart] = await Promise.all([
@@ -315,7 +338,7 @@ function renderModal(coin, chart) {
   const price = md?.current_price?.[state.currency];
   const ch24 = md?.price_change_percentage_24h;
   const desc = coin.description?.en || "";
-  const shortDesc = desc.replace(/<[^>]*>/g, "").slice(0, 400);
+  const plainDesc = desc.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 
   const content = $("modal-content");
   content.innerHTML = `
@@ -351,7 +374,7 @@ function renderModal(coin, chart) {
       <div class="modal-stat"><div class="modal-stat-label">Circulating Supply</div><div class="modal-stat-value">${md?.circulating_supply ? md.circulating_supply.toLocaleString("en", { maximumFractionDigits: 0 }) : "—"}</div></div>
       <div class="modal-stat"><div class="modal-stat-label">Max Supply</div><div class="modal-stat-value">${md?.max_supply ? md.max_supply.toLocaleString("en", { maximumFractionDigits: 0 }) : "∞"}</div></div>
     </div>
-    ${shortDesc ? `<div class="modal-desc"><h3>About ${coin.name}</h3><p>${shortDesc}${desc.length > 400 ? "..." : ""}</p></div>` : ""}
+    ${plainDesc ? `<div class="modal-desc"><h3>About ${coin.name}</h3><p>${plainDesc}</p></div>` : ""}
   `;
 
   drawModalChart(chart.prices);
@@ -387,15 +410,6 @@ function drawModalChart(prices) {
     ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
   }
 
-  ctx.fillStyle = "rgba(255,255,255,.25)";
-  ctx.font = "10px 'JetBrains Mono'";
-  ctx.textAlign = "right";
-  for (let i = 0; i <= 4; i++) {
-    const val = max - (range / 4) * i;
-    const y = (h / 4) * i;
-    ctx.fillText(fmt(val), w - 4, y + 12);
-  }
-
   ctx.beginPath();
   vals.forEach((v, i) => {
     const x = i * step;
@@ -407,14 +421,21 @@ function drawModalChart(prices) {
   ctx.lineJoin = "round";
   ctx.stroke();
 
-  const grad = ctx.createLinearGradient(0, 0, 0, h);
-  grad.addColorStop(0, isUp ? "rgba(16,185,129,.2)" : "rgba(239,68,68,.2)");
-  grad.addColorStop(1, "rgba(0,0,0,0)");
   ctx.lineTo((vals.length - 1) * step, h);
   ctx.lineTo(0, h);
   ctx.closePath();
-  ctx.fillStyle = grad;
+  ctx.fillStyle = isUp ? "rgba(16,185,129,.08)" : "rgba(239,68,68,.08)";
   ctx.fill();
+
+  // Render price labels last so they stay above the chart line and fill.
+  ctx.fillStyle = "rgba(255,255,255,.5)";
+  ctx.font = "10px 'JetBrains Mono'";
+  ctx.textAlign = "right";
+  for (let i = 0; i <= 4; i++) {
+    const val = max - (range / 4) * i;
+    const y = (h / 4) * i;
+    ctx.fillText(fmt(val), w - 4, y + 12);
+  }
 }
 
 function attachChartTimeframeBtns() {
