@@ -1,21 +1,68 @@
-# Kryptos - Crypto Monitoring Dashboard
+# Kryptos
 
-Dashboard pemantau harga cryptocurrency real-time menggunakan CoinGecko API.
+Kryptos adalah dashboard web untuk memantau harga dan data pasar cryptocurrency menggunakan CoinGecko API.
 
-## Setup
+## Fitur
 
-1. Clone repository ini
-2. Salin file konfigurasi:
+- Statistik pasar cryptocurrency global
+- Harga, market cap, volume, dan perubahan harga cryptocurrency
+- Pencarian cryptocurrency
+- Pilihan mata uang USD, IDR, EUR, JPY, dan GBP
+- Grafik harga berdasarkan rentang waktu
+- Daftar cryptocurrency trending, top gainers, dan top losers
+- Pagination dan pilihan jumlah data per halaman
+- Pembaruan data otomatis setiap 60 detik
+- Tampilan responsif untuk desktop dan perangkat seluler
+
+## Teknologi
+
+- HTML
+- CSS
+- JavaScript
+- CoinGecko API
+
+Project ini tidak menggunakan framework, backend, database, atau build tool.
+
+## Persyaratan
+
+- Browser modern dengan dukungan JavaScript
+- CoinGecko Demo API key
+
+## Instalasi
+
+1. Buka terminal pada direktori root project.
+
+2. Salin file konfigurasi menjadi `config.js`.
+
    ```bash
    cp config.example.js config.js
    ```
-3. Edit `config.js` dan isi dengan API key CoinGecko Anda:
+
+3. Isi CoinGecko API key pada `config.js`.
+
    ```js
    const CONFIG = {
-     COINGECKO_API_KEY: "API_KEY_ANDA_DI_SINI",
+     COINGECKO_API_KEY: "YOUR_API_KEY",
    };
    ```
-4. Buka `index.html` di browser (atau jalankan via live server)
 
-> **Catatan:** File `config.js` sudah masuk `.gitignore` dan **tidak akan** ter-push ke GitHub.  
-> Dapatkan API key gratis di [coingecko.com/api](https://www.coingecko.com/api/documentation).
+4. Buka `index.html` pada browser.
+
+## Struktur Project
+
+```text
+kryptos-website/
+|-- index.html
+|-- style.css
+|-- script.js
+|-- config.example.js
+`-- README.md
+```
+
+## Konfigurasi
+
+`config.js` digunakan untuk menyimpan CoinGecko Demo API key secara lokal dan tidak disertakan dalam repository.
+
+## Sumber Data
+
+Seluruh data pasar cryptocurrency disediakan oleh [CoinGecko API](https://www.coingecko.com/api/documentation).
