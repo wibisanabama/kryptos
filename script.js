@@ -159,13 +159,10 @@ function drawSparkline(canvas, prices) {
   ctx.lineWidth = 1.5;
   ctx.stroke();
 
-  const grad = ctx.createLinearGradient(0, 0, 0, h);
-  grad.addColorStop(0, isUp ? "rgba(16,185,129,.15)" : "rgba(239,68,68,.15)");
-  grad.addColorStop(1, "rgba(0,0,0,0)");
   ctx.lineTo(w, h);
   ctx.lineTo(0, h);
   ctx.closePath();
-  ctx.fillStyle = grad;
+  ctx.fillStyle = isUp ? "rgba(16,185,129,.08)" : "rgba(239,68,68,.08)";
   ctx.fill();
 }
 
@@ -528,9 +525,6 @@ async function refreshAll() {
 
 async function init() {
   await refreshAll();
-  setTimeout(() => {
-    $("loading-overlay").classList.add("hidden");
-  }, 1200);
   setInterval(refreshAll, 60000);
 }
 

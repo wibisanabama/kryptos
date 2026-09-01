@@ -34,16 +34,12 @@
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
                     <div class="currency-dropdown" id="currency-dropdown">
-                        <button class="currency-option active" data-currency="usd">🇺🇸 USD</button>
-                        <button class="currency-option" data-currency="idr">🇮🇩 IDR</button>
-                        <button class="currency-option" data-currency="eur">🇪🇺 EUR</button>
-                        <button class="currency-option" data-currency="jpy">🇯🇵 JPY</button>
-                        <button class="currency-option" data-currency="gbp">🇬🇧 GBP</button>
+                        <button class="currency-option active" data-currency="usd"><svg class="currency-option-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 9.5c0-1.1 1.1-2 2.5-2h2c1.4 0 2.5.9 2.5 2S14.4 11.5 13 11.5h-2c-1.4 0-2.5.9-2.5 2s1.1 2 2.5 2h2c1.4 0 2.5-.9 2.5-2M12 5.5v13"/></svg><span>USD</span></button>
+                        <button class="currency-option" data-currency="idr"><svg class="currency-option-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 9.5c0-1.1 1.1-2 2.5-2h2c1.4 0 2.5.9 2.5 2S14.4 11.5 13 11.5h-2c-1.4 0-2.5.9-2.5 2s1.1 2 2.5 2h2c1.4 0 2.5-.9 2.5-2M12 5.5v13"/></svg><span>IDR</span></button>
+                        <button class="currency-option" data-currency="eur"><svg class="currency-option-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 9.5c0-1.1 1.1-2 2.5-2h2c1.4 0 2.5.9 2.5 2S14.4 11.5 13 11.5h-2c-1.4 0-2.5.9-2.5 2s1.1 2 2.5 2h2c1.4 0 2.5-.9 2.5-2M12 5.5v13"/></svg><span>EUR</span></button>
+                        <button class="currency-option" data-currency="jpy"><svg class="currency-option-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 9.5c0-1.1 1.1-2 2.5-2h2c1.4 0 2.5.9 2.5 2S14.4 11.5 13 11.5h-2c-1.4 0-2.5.9-2.5 2s1.1 2 2.5 2h2c1.4 0 2.5-.9 2.5-2M12 5.5v13"/></svg><span>JPY</span></button>
+                        <button class="currency-option" data-currency="gbp"><svg class="currency-option-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 9.5c0-1.1 1.1-2 2.5-2h2c1.4 0 2.5.9 2.5 2S14.4 11.5 13 11.5h-2c-1.4 0-2.5.9-2.5 2s1.1 2 2.5 2h2c1.4 0 2.5-.9 2.5-2M12 5.5v13"/></svg><span>GBP</span></button>
                     </div>
-                </div>
-                <div class="last-updated" id="last-updated">
-                    <span class="pulse-dot"></span>
-                    <span>Live</span>
                 </div>
             </div>
         </header>
@@ -155,22 +151,8 @@
             <div class="modal" id="coin-modal">
                 <div class="modal-body" id="modal-body">
                     <div class="modal-content" id="modal-content">
-                        <div class="modal-loading">
-                            <div class="spinner"></div>
-                            <p>Loading data...</p>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="loading-overlay" id="loading-overlay">
-            <div class="loading-content">
-                <div class="loading-logo">Kryptos</div>
-                <div class="loading-bar">
-                    <div class="loading-bar-fill"></div>
-                </div>
-                <p class="loading-text">Loading market data...</p>
             </div>
         </div>
 
